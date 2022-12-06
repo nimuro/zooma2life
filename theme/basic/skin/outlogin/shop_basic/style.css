@@ -23,7 +23,9 @@
 #ol_auto label {letter-spacing:-0.1em}
 #ol_auto input {width:13px;height:13px;vertical-align:bottom} 
 
-.btn_member_mn {min-width:150px;padding:5px 0;border:0;background:transparent;color:#fff;text-align:center}
+/*.btn_member_mn {min-width:150px;padding:5px 0;border:0;background:transparent;color:#fff;text-align:center}*/
+/* gogosing 쇼핑몰 멤버 메뉴 */
+.btn_member_mn {min-width:150px;padding:5px 0;border:0;background:transparent;color:#00aced;text-align:center}
 .btn_member_mn .profile_img {display:inline-block;margin-right:5px}
 .btn_member_mn .profile_img img {border-radius:50%}
 .btn_member_mn .profile_name {display:inline-block;max-width:70px;line-height:34px;vertical-align: bottom;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}

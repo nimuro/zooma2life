@@ -4,6 +4,7 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+//add_stylesheet('<link rel="stylesheet" href="'../../../css/mobile_shop.css">', 0);
 ?>
 
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
@@ -138,6 +139,189 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         ?>
         <!-- }  추천 비추천 끝 -->
     </section>
+
+    <!-- 결제 모듈 추가 GOGOSING -->
+<!--    <div class="sit_order_btn">-->
+<!--        <button type="submit" onclick="document.pressed=this.value;" value="장바구니" class="sit_btn_cart">장바구니</button>-->
+<!--        <button type="submit" onclick="document.pressed=this.value;" value="바로구매" class="sit_btn_buy">바로구매</button>-->
+<!--    </div>-->
+
+    <!-- CSS -->
+   <style type="text/css">
+       /* 주문서 작성 - 결제수단 */
+        #sod_frm_pay {position:relative;margin:10px 0 0;background:#fff;border:1px solid #e3e5e8}
+       #sod_frm_pay {position:relative;margin:10px 0 0}
+       #sod_frm_pay h2 {font-size:1.167em;padding:15px;border-bottom:1px solid #e3e5e8}
+       #sod_frm_pay .tooltip_txt {height:auto;line-height:18px;font-weight:normal;font-size:1em;padding:10px 20px;margin:10px}
+       #sod_frm_pay .tooltip_txt i {float:left;line-height:36px;font-size:2em;margin-right:15px}
+       #sod_frm_pay .tooltip_txt:before {height:100%}
+       #sod_frm_pay input[type="radio"] {}
+       #sod_frm_pay .lb_icon {display:inline-block;position:relative;cursor:pointer;z-index:1}
+       #sod_frm_pay input[type="radio"]:checked+.lb_icon {color:#3a8afd;z-index:3}
+       #sod_frm_pay input[type="radio"] + label span {top:7px}
+
+        #sod_frm #sod_bsk_tot li:last-child {
+            border-bottom: 0 none;
+        }
+        .sod_right #od_tot_price {
+            border: 1px solid #e3e5e8;
+        }
+        #sod_frm_pay {
+            position: relative;
+            margin: 10px 0 0;
+        }
+        #sod_frm_pay .lb_icon {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            z-index: 1;
+        }
+        #od_pay_sl .lb_icon {
+            display: inline-block;
+            float: left;
+            width: 50%;
+            background: #fff;
+            border: 1px solid #eceff4;
+            margin: -1px 0 0 -1px;
+            cursor: pointer;
+            height: 60px;
+            position: relative;
+            padding-left: 65px;
+            padding-top: 20px;
+            z-index: 1;
+        }
+        #sod_frm #sod_frm_pt_alert {
+            margin: 5px 0;
+            color: #38b2bb;
+        }
+        #sod_frm_paysel .bank_icon {
+            background: url(../../../img/pay_icon1.png) no-repeat 15px 50% #fff;
+        }
+        #sod_frm_paysel .KPAY {
+            background: url(../../../img/kpay.png) no-repeat 50% 50% #fff;
+            overflow: hidden;
+            text-indent: -999px;
+        }
+
+        /* 버튼 */
+       #display_pay_button {
+           background: #fff;
+           padding: 20px;
+           border: 0px solid #e3e5e8;
+           border-top: 0
+       }
+       #display_pay_button .btn_submit {
+           width: 186px;
+           float: left;
+           margin-right: 5px;
+           height: 50px;
+           margin-bottom: 10px;
+           font-weight: bold;
+           font-size: 1.25em;
+           /*width: 100%;*/
+           /*height: 50px;*/
+           /*font-weight: bold;*/
+           /*font-size: 1.25em;*/
+           /*cursor: pointer;*/
+           /*border: 1px solid #3a8afd*/
+       }
+
+       #display_pay_button .btn01 {
+           width: 186px;
+           float: left;
+           margin-right: 5px;
+           height: 50px;
+           margin-bottom: 10px;
+           font-weight: bold;
+           font-size: 1.25em;
+           /*width: 100%;*/
+           /*height: 50px;*/
+           /*line-height: 38px;*/
+           /*font-weight: bold;*/
+           /*font-size: 1.25em;*/
+           /*margin: 5px 0;*/
+           /*border: 1px solid #ccd1d9*/
+       }
+
+       /*은행*/
+       #settle_bank {border:1px solid #e3e5e8;border-top:0 none;background:#fff;padding:10px;clear:both;line-height:32px}
+       #settle_bank:after {display:block;visibility:hidden;clear:both;content:''}
+       #settle_bank label {float:left;width:30%;line-height:30px}
+       #settle_bank select, #settle_bank input {width:20%;height:32px;margin:0 0 5px;border:1px solid #e3e5e8;border-radius:3px;text-align:left}
+       #settle_bank option {padding:3px 0}
+       #settle_bank #od_deposit_name {height:32px;padding:0 5px;border:1px solid #e3e5e8}
+
+       .btn_confirm {
+           text-align: center;
+       }
+
+       a.btn01 {
+           display: inline-block;
+           padding: 13px;
+           border: 1px solid #ccc;
+           background: #fafafa;
+           color: #000;
+           text-decoration: none;
+           vertical-align: middle;
+       }
+
+       #forderform .sod_right #sod_bsk_tot {border:1px solid #e3e5e8}
+        #forderform .od_pay_buttons_el{margin-top:20px;border:1px solid #e3e5e8;background:#fff;padding:10px}
+        #forderform .od_pay_buttons_el h3{font-size:1.167em;margin:0px 0 5px}
+        #forderform #sod_frm_pt{border-top:1px solid #e3e5e8}
+    </style>
+
+    <br/>
+    <!-- gogosing start -->
+    -- 결제 모듈 준비중 ---
+    <br/>
+    <br/>
+
+    <?php
+    // orderform.php
+//    if($is_mobile_order) {
+//        $order_action_url = G5_BBS_PATH.'/orderformupdate.php';
+//        require_once(G5_BBS_PATH.'/orderform.sub.php');
+//    } else {
+//        $order_action_url = G5_BBS_PATH.'/orderformupdate.php';
+//        require_once(G5_BBS_PATH.'/orderform.sub.php');
+//    }
+
+    if( $view['wr_1'] == '1') {
+        $order_action_url = G5_BBS_PATH.'/orderformupdate.php';
+        require_once(G5_BBS_PATH.'/orderform.sub.php');
+
+//        var_dump("$order_action_url=",$order_action_url); // gogosing
+    }
+    ?>
+
+    <script>
+        jQuery(function($){
+            $(".sit_order_btn").on("click", "button", function(e){
+                e.preventDefault();
+
+                var $this = $(this);
+
+                // console.log("this : ",$this);
+
+                if( $this.hasClass("sit_btn_cart") ){
+                    $("#sit_ov_btn .sit_btn_cart").trigger("click");
+                } else if ( $this.hasClass("sit_btn_buy") ) {
+                    $("#sit_ov_btn .sit_btn_buy").trigger("click");
+                }
+            });
+
+            // console.log("href : ",window.location.href);
+            // console.log("href : ",window.location.href.split("#").length);
+
+            if (window.location.href.split("#").length > 1) {
+                let id = window.location.href.split("#")[1];
+                alert("id",id);
+                $("#btn_" + id).trigger("click");
+            };
+        });
+    </script>
+    <!-- gogosing end -->
 
     <?php
     $cnt = 0;

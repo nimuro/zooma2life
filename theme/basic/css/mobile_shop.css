@@ -59,7 +59,7 @@ input, textarea {
 .hd_pops_footer button {margin-right:5px;padding:5px 10px;border:0;background:#393939;color:#fff}
 
 /* 상단 레이아웃 */
-#hd {position:relative;background:#212020}
+#hd {position:relative;background:#FFCDC1}
 #hd h1 {position:absolute;font-size:0;text-indent:-9999em;line-height:0;overflow:hidden}
 
 #hd #logo a{display:block;text-align:center;padding:15px;height:55px;vertical-align:top}
@@ -123,9 +123,9 @@ box-shadow:0 0 5px #eee}
 .ctt_img {text-align:center}
 
 /* 하단 레이아웃 */
-#ft {background:#212020;padding:20px;text-align:left}
+#ft {background:#ffffff;padding:20px;text-align:left}
 #ft h2 {position:absolute;font-size:0;text-indent:-9999em;line-height:0;overflow:hidden}
-#ft p {margin:0;padding:10px 0;line-height:1.8em;color:#e3e3e3;font-size:0.92em}
+#ft p {margin:0;padding:10px 0;line-height:1.8em;color:#786d6d;font-size:0.92em}
 #ft_logo {padding:20px 0 0}
 #ft_company {}
 #ft_company a {display:inline-block;padding-right:10px;line-height:1em;color:#fff}

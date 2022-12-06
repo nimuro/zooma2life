@@ -333,5 +333,7 @@ jQuery(function($){
 		let id = window.location.href.split("#")[1];
 		$("#btn_" + id).trigger("click");
 	};
+
+    goto_url("./orderform.php?od_id=$od_id&amp;$qstr");
 });
 </script>

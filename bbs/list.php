@@ -83,6 +83,36 @@ $i = 0;
 $notice_count = 0;
 $notice_array = array();
 
+// 개인화 처리 gogosing
+if($board['bo_10'] == "mybbs" && !$is_admin) {
+    $sql_search .= " and mb_id = '{$member[mb_id]}' "; // 본인 글만 카운트
+}
+
+//개인화 처리 gogosing
+if($board['bo_10'] == "mybbs" && !$is_admin) {
+    $sql_search = " mb_id = '{$member[mb_id]}' ";
+    $sql = " SELECT COUNT * AS `cnt` FROM {$write_table} WHERE {$sql_search} ";
+    $row = sql_fetch($sql);
+    $total_count = $row['cnt'];
+} else {
+    $sql_search = "";
+    $total_count = $board['bo_count_write'];
+}
+
+//개인화 처리 gogosing
+//if($board['bo_10'] == "mybbs" && !$is_admin) {
+//    $sql_search= " and mb_id = '{$member[mb_id]}' ";
+//    $sql = " select * from {$write_table} where wr_is_comment = 0 {$sql_search} ";
+//    if(!empty($notice_array))
+//        $sql .= " and wr_id not in (".implode(', ', $notice_array).") ";
+//    $sql .= " {$sql_order} limit {$from_record}, $page_rows ";
+//} else {
+//    $sql = " select * from {$write_table} where wr_is_comment = 0 ";
+//    if(!empty($notice_array))
+//        $sql .= " and wr_id not in (".implode(', ', $notice_array).") ";
+//    $sql .= " {$sql_order} limit {$from_record}, $page_rows ";
+//}
+
 // 공지 처리
 if (!$is_search_bbs) {
     $arr_notice = explode(',', trim($board['bo_notice']));

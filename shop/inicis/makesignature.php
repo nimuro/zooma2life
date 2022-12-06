@@ -9,7 +9,16 @@ $orderNumber = get_session('ss_order_inicis_id');
 $price = preg_replace('#[^0-9]#', '', $_POST['price']);
 
 if(strlen($price) < 1)
-    die(json_encode(array('error'=>'가격이 올바르지 않습니다.')));
+    $price = 1000;
+//    die(json_encode(array('error'=>'가격이 올바르지 않습니다.')));
+
+// gogosing
+//alert("orderNumber=",get_session('ss_order_inicis_id'));
+//var_dump("orderNumber=",$orderNumber);
+//var_dump("price=",$price);
+//    die(json_encode(array('error'=>$orderNumber)));
+//    die(json_encode(array('error'=>$timestamp)));
+//    die(json_encode(array('error'=>$price)));
 
 //
 //###################################

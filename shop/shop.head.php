@@ -34,7 +34,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_JS_URL.'/owlcarousel/owl.carou
             <?php if(defined('G5_COMMUNITY_USE') == false || G5_COMMUNITY_USE) { ?>
     		<ul id="hd_define">
     			<li><a href="<?php echo G5_URL ?>/">커뮤니티</a></li>
-    			<li class="active"><a href="<?php echo G5_SHOP_URL ?>/">쇼핑몰</a></li>
+    			<li class="active"><a href="<?php echo G5_SHOP_URL ?>/">교육/멘토링</a></li>
     		</ul>
             <?php } ?>
 			<ul id="hd_qnb">

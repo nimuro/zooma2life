@@ -21,34 +21,136 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <input type="hidden" name="sst" value="<?php echo $sst ?>">
     <input type="hidden" name="sod" value="<?php echo $sod ?>">
     <input type="hidden" name="page" value="<?php echo $page ?>">
-    <?php
-    $option = '';
-    $option_hidden = '';
-    if ($is_notice || $is_html || $is_secret || $is_mail) { 
-        $option = '';
-        if ($is_notice) {
-            $option .= PHP_EOL.'<li class="chk_box"><input type="checkbox" id="notice" name="notice"  class="selec_chk" value="1" '.$notice_checked.'>'.PHP_EOL.'<label for="notice"><span></span>공지</label></li>';
+    <!-- 추가 변수 gogosing -->
+    <input type="hidden" name="wr_1" value="<?php echo $wr_1 ?>"> <!-- 콘텐츠 유형 : 무료 0 유료 1 -->
+
+        <!-- gogosing start -->
+
+        <?php
+        // 강의/소모임/전자책 결제 설정 항목 출력
+        if ($gr_id == 'market' || $gr_id == 'somoim' || $gr_id == 'ebook') {
+            echo '
+                <div id="div_class_type" >
+            <br>
+            <tr>
+                <th scope="row"><label for="class_type">컨텐츠 유형<strong class="sound_only">필수</strong></label></th>
+                <td>
+                    <select id="class_type" name="class_type">
+                        <option value="0">무료 강의</option>
+                        <option value="1">유료 강의</option>
+                        <option value="">선택</option>
+                    </select>
+                    <br><br>
+                </td>
+            </tr>
+        </div>
+
+        <div id="amount_input" style="display: none">
+            <tr>
+                <th scope="row"><label for="mb_id">금액 (원) &nbsp;&nbsp;&nbsp; <strong class="sound_only">필수</strong></label></th>
+                <td>
+                    <strong id="msg_mb_id" class="msg_sound_only"></strong>
+                    <input type="text" name="wr_2" value="" id="wr_2" placeholder="최소 금액 1000원" padding: 5px>
+                </td>
+            </tr>
+            <hr>
+        </div>
+        ';
+        /*       <input type="text" name="wr_2" value="--><?php //echo $write['wr_2']?><!--" id="wr_2" placeholder="최소 금액 1000원" padding: 5px>*/
         }
-        if ($is_html) {
-            if ($is_dhtml_editor) {
-                $option_hidden .= '<input type="hidden" value="html1" name="html">';
-            } else {
-                $option .= PHP_EOL.'<li class="chk_box"><input type="checkbox" id="html" name="html" onclick="html_auto_br(this);" class="selec_chk" value="'.$html_value.'" '.$html_checked.'>'.PHP_EOL.'<label for="html"><span></span>html</label></li>';
+        ?>
+
+        <script>
+            function selectClassType(){
+                var class_type = $("input[name=wr_1]").val();
+                console.log(class_type)
+                $("#class_type").val(class_type).prop("selected", true);
             }
-        }
-        if ($is_secret) {
-            if ($is_admin || $is_secret==1) {
-                $option .= PHP_EOL.'<li class="chk_box"><input type="checkbox" id="secret" name="secret"  class="selec_chk" value="secret" '.$secret_checked.'>'.PHP_EOL.'<label for="secret"><span></span>비밀글</label></li>';
-            } else {
-                $option_hidden .= '<input type="hidden" name="secret" value="secret">';
+            // id 로 selectbox 조회
+            function getSelectBoxValue(selboxId){
+                var class_type = document.getElementById(selboxId);
+                var class_value = class_type.options[class_type.selectedIndex].value;
+                return class_value;
             }
+            function changeAmountInput(){
+                if ( '1' == getSelectBoxValue('class_type')) {
+                    $("#amount_input").css("display", "");
+                }else {
+                    $("#amount_input").css("display", "none"); // 금액 히든 처리
+                    $("#wr_2").prop("value", ""); // 금액 초기화
+                    $("input[name=wr_2]").prop("value", ""); // 금액 초기화
+                }
+
+                // 기존 저장한 금액 조회
+                // var amount_value = $("#amount").val();
+                // if(!amount_value) {
+                //     // console.log("amount_value is empty")
+                //     amount_value = $("input[name=wr_2]").val();
+                //     if(!amount_value) {
+                //         amount_value = 1000; // 최소금액 셋팅
+                //     }
+                //     $("#amount").prop("value", amount_value);
+                // }
+            }
+            $("#class_type").on("change", function(){
+                changeAmountInput();
+
+                // wr_1 save
+                var class_value = $("#class_type option:selected").val();
+                $("input[name=wr_1]").prop("value", class_value);
+
+
+                // var select = document.getElementById("wr_1");
+                //
+                // // select element에서 선택된 option의 value가 저장된다.
+                // var selectValue = select.options[select.selectedIndex].value;
+                //
+                // // select element에서 선택된 option의 text가 저장된다.
+                // var selectText = select.options[select.selectedIndex].text;
+
+                // $("#selectbox option:selected").val();
+                // $("#selectbox").val();
+                // $('select[name="wr_1"]').val();
+            });
+        </script>
+
+        <?php
+        // 결제기능 로딩
+        if ($gr_id == 'market' || $gr_id == 'somoim' || $gr_id == 'ebook') {
+            echo("<script language='javascript'>selectClassType();</script>"); // 컨텐츠 유형 로딩 (유료,무료)
+            echo("<script language='javascript'>changeAmountInput();</script>"); // 유료 강의 선택시 노출
         }
-        if ($is_mail) {
-            $option .= PHP_EOL.'<li class="chk_box"><input type="checkbox" id="mail" name="mail"  class="selec_chk" value="mail" '.$recv_email_checked.'>'.PHP_EOL.'<label for="mail"><span></span>답변메일받기</label></li>';
-        }
+        ?>
+        <!-- gogosing end -->
+
+<?php
+$option = '';
+$option_hidden = '';
+if ($is_notice || $is_html || $is_secret || $is_mail) {
+$option = '';
+if ($is_notice) {
+    $option .= PHP_EOL.'<li class="chk_box"><input type="checkbox" id="notice" name="notice"  class="selec_chk" value="1" '.$notice_checked.'>'.PHP_EOL.'<label for="notice"><span></span>공지</label></li>';
+}
+if ($is_html) {
+    if ($is_dhtml_editor) {
+        $option_hidden .= '<input type="hidden" value="html1" name="html">';
+    } else {
+        $option .= PHP_EOL.'<li class="chk_box"><input type="checkbox" id="html" name="html" onclick="html_auto_br(this);" class="selec_chk" value="'.$html_value.'" '.$html_checked.'>'.PHP_EOL.'<label for="html"><span></span>html</label></li>';
     }
-    echo $option_hidden;
-    ?>
+}
+if ($is_secret) {
+    if ($is_admin || $is_secret==1) {
+        $option .= PHP_EOL.'<li class="chk_box"><input type="checkbox" id="secret" name="secret"  class="selec_chk" value="secret" '.$secret_checked.'>'.PHP_EOL.'<label for="secret"><span></span>비밀글</label></li>';
+    } else {
+        $option_hidden .= '<input type="hidden" name="secret" value="secret">';
+    }
+}
+if ($is_mail) {
+    $option .= PHP_EOL.'<li class="chk_box"><input type="checkbox" id="mail" name="mail"  class="selec_chk" value="mail" '.$recv_email_checked.'>'.PHP_EOL.'<label for="mail"><span></span>답변메일받기</label></li>';
+}
+}
+echo $option_hidden;
+?>
 
     <?php if ($is_category) { ?>
     <div class="bo_w_select write_div">
@@ -65,24 +167,24 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 	        <label for="wr_name" class="sound_only">이름<strong>필수</strong></label>
 	        <input type="text" name="wr_name" value="<?php echo $name ?>" id="wr_name" required class="frm_input half_input required" placeholder="이름">
 	    <?php } ?>
-	
+
 	    <?php if ($is_password) { ?>
 	        <label for="wr_password" class="sound_only">비밀번호<strong>필수</strong></label>
 	        <input type="password" name="wr_password" id="wr_password" <?php echo $password_required ?> class="frm_input half_input <?php echo $password_required ?>" placeholder="비밀번호">
 	    <?php } ?>
-	
+
 	    <?php if ($is_email) { ?>
 			<label for="wr_email" class="sound_only">이메일</label>
 			<input type="text" name="wr_email" value="<?php echo $email ?>" id="wr_email" class="frm_input half_input email " placeholder="이메일">
 	    <?php } ?>
-	    
-	
+
+
 	    <?php if ($is_homepage) { ?>
 	        <label for="wr_homepage" class="sound_only">홈페이지</label>
 	        <input type="text" name="wr_homepage" value="<?php echo $homepage ?>" id="wr_homepage" class="frm_input half_input" size="50" placeholder="홈페이지">
 	    <?php } ?>
 	</div>
-	
+
     <?php if ($option) { ?>
     <div class="write_div">
         <span class="sound_only">옵션</span>
@@ -94,7 +196,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
     <div class="bo_w_tit write_div">
         <label for="wr_subject" class="sound_only">제목<strong>필수</strong></label>
-        
+
         <div id="autosave_wrapper" class="write_div">
             <input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="frm_input full_input required" size="50" maxlength="255" placeholder="제목">
             <?php if ($is_member) { // 임시 저장된 글 기능 ?>
@@ -108,7 +210,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             </div>
             <?php } ?>
         </div>
-        
+
     </div>
 
     <div class="write_div">
@@ -124,7 +226,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             <div id="char_count_wrap"><span id="char_count"></span>글자</div>
             <?php } ?>
         </div>
-        
+
     </div>
 
     <?php for ($i=1; $is_link && $i<=G5_LINK_COUNT; $i++) { ?>
@@ -149,7 +251,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             <input type="checkbox" id="bf_file_del<?php echo $i ?>" name="bf_file_del[<?php echo $i;  ?>]" value="1"> <label for="bf_file_del<?php echo $i ?>"><?php echo $file[$i]['source'].'('.$file[$i]['size'].')';  ?> 파일 삭제</label>
         </span>
         <?php } ?>
-        
+
     </div>
     <?php } ?>
 
@@ -239,6 +341,32 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                 }
                 else if (char_max > 0 && char_max < cnt) {
                     alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
+                    return false;
+                }
+            }
+        }
+
+        <!-- gogosing -->
+        <?php
+            if ($gr_id == 'market' || $gr_id == 'somoim' || $gr_id == 'ebook') {
+                echo 'var payment = true;';
+            }else {
+                echo 'var payment = false;';
+            }
+        ?>
+        if(payment) {
+            console.log("payment")
+            if( ! $("#class_type").val()) {
+                alert("컨텐츠 유형을 선택해 주세요.")
+                return false;
+            }
+            if( "1" == getSelectBoxValue("class_type")) {
+                if( ! $("#wr_2").val()) {
+                    alert("컨텐츠 금액을 입력해 주세요.")
+                    return false;
+                }
+                if($("#wr_2").val() < 1000) {
+                    alert("컨텐츠 최소 금액은 1000원 입니다.")
                     return false;
                 }
             }

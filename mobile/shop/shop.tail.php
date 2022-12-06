@@ -21,7 +21,7 @@ $admin = get_admin("super");
         <a href="<?php echo get_pretty_url('content', 'provision'); ?>">이용약관</a>
 
     </div>
-    <div id="ft_logo"><a href="<?php echo G5_SHOP_URL; ?>/"><img src="<?php echo G5_DATA_URL; ?>/common/mobile_logo_img2" alt="<?php echo $config['cf_title']; ?> 메인"></a></div>
+    <div id="ft_logo"><a href="<?php echo G5_SHOP_URL; ?>/"><img src="<?php echo G5_DATA_URL; ?>/common/mobile_logo_img2" alt="<?php echo $config['cf_title']; ?> 메인 width="200" height="40" " ></a></div>
     <p>
         <span><b>회사명</b> <?php echo $default['de_admin_company_name']; ?></span>
         <span><b>주소</b> <?php echo $default['de_admin_company_addr']; ?></span><br>

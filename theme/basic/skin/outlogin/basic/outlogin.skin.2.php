@@ -35,6 +35,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
             	<strong class="scrap"><?php echo $mb_scrap_cnt; ?></strong>
             </a>
         </li>
+        <li>
+            <a href="<?php echo G5_BBS_URL ?>/order.php" target="_blank" id="ol_after_scrap" class="win_scrap">
+                <i class="fa fa-thumb-tack" aria-hidden="true"></i>구매한 게시물
+                <strong class="scrap"><?php echo $mb_scrap_cnt; ?></strong>
+            </a>
+        </li>
     </ul>
     <footer>
     	<a href="<?php echo G5_BBS_URL ?>/logout.php" id="ol_after_logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 로그아웃</a>

@@ -67,7 +67,7 @@ require_once G5_ADMIN_PATH . '/admin.head.php';
                             <option value="comm" <?php echo get_selected($nw['nw_division'], 'comm'); ?>>커뮤니티</option>
                             <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
                                 <option value="both" <?php echo get_selected($nw['nw_division'], 'both', true); ?>>커뮤니티와 쇼핑몰</option>
-                                <option value="shop" <?php echo get_selected($nw['nw_division'], 'shop'); ?>>쇼핑몰</option>
+                                <option value="shop" <?php echo get_selected($nw['nw_division'], 'shop'); ?>>교육/멘토링</option>
                             <?php } ?>
                         </select>
                     </td>

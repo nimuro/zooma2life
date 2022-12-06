@@ -154,7 +154,7 @@ require_once(G5_PATH.'/head.sub.php');
         <li><a href="./theme_preview.php?theme=<?php echo $theme.$qstr_view; ?>">게시글 보기</a></li>
         <?php if(defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
         <?php if(defined('G5_COMMUNITY_USE') == false || G5_COMMUNITY_USE) { ?>
-        <li><a href="./theme_preview.php?theme=<?php echo $theme.$qstr_shop; ?>">쇼핑몰</a></li>
+        <li><a href="./theme_preview.php?theme=<?php echo $theme.$qstr_shop; ?>">교육/멘토링</a></li>
         <?php } ?>
         <li><a href="./theme_preview.php?theme=<?php echo $theme.$qstr_ca_list; ?>">상품리스트</a></li>
         <li><a href="./theme_preview.php?theme=<?php echo $theme.$qstr_item; ?>">상품상세</a></li>

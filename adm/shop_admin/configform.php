@@ -1687,7 +1687,7 @@ function byte_check(el_cont, el_byte)
 
 
 <div class="btn_fixed_top">
-    <a href=" <?php echo G5_SHOP_URL; ?>" class="btn btn_02">쇼핑몰</a>
+    <a href=" <?php echo G5_SHOP_URL; ?>" class="btn btn_02">교육/멘토링</a>
     <input type="submit" value="확인" class="btn_submit btn" accesskey="s">
 </div>
 

@@ -9,8 +9,8 @@ if ($sop != 'and' && $sop != 'or')
 @include_once($board_skin_path.'/view.head.skin.php');
 
 // gogosing
-// /Users/imdahye/Downloads/gnuboard-gnuboard5-a21d02f/skin/board/basic
-//alert($board_skin_path);
+//var_dump("sop=",$sop);
+//var_dump("board_skin_path=",$board_skin_path);
 
 $sql_search = "";
 // 검색이면

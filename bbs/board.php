@@ -18,6 +18,10 @@ if (!$bo_table) {
 
 $g5['board_title'] = ((G5_IS_MOBILE && $board['bo_mobile_subject']) ? $board['bo_mobile_subject'] : $board['bo_subject']);
 
+// gogosing test start
+
+// gogosing test end
+
 // wr_id 값이 있으면 글읽기
 if ((isset($wr_id) && $wr_id) || (isset($wr_seo_title) && $wr_seo_title)) {
     // 글이 없을 경우 해당 게시판 목록으로 이동

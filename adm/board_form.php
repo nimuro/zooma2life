@@ -262,6 +262,14 @@ $pg_anchor = '<ul class="anchor">
             </td>
         </tr>
         <tr>
+            <th scope="row"><label for="bo_10">개인화 게시판 설정</label></th>
+            <td colspan="2">
+                <?php echo help('개인화 게시판(로그인된 자신의 글만 볼 수 있음) 으로 설정하는 경우 체크해 주세요.') ?>
+                <input type="checkbox" name="bo_10" value="mybbs" id="bo_10" <?php echo $board['bo_10']?'checked':''; ?>>
+                <label for="bo_10">사용</label>
+            </td>
+        </tr>
+        <tr>
             <th scope="row"><label for="bo_subject">게시판 제목<strong class="sound_only">필수</strong></label></th>
             <td colspan="2">
                 <input type="text" name="bo_subject" value="<?php echo get_text($board['bo_subject']) ?>" id="bo_subject" required class="required frm_input" size="80" maxlength="120">
@@ -1317,7 +1325,8 @@ $pg_anchor = '<ul class="anchor">
             <col class="grid_3">
         </colgroup>
         <tbody>
-        <?php for ($i=1; $i<=10; $i++) { ?>
+        <?php //for ($i=1; $i<=10; $i++) { ?> <!--gogosing-->
+        <?php for ($i=1; $i<=9; $i++) { ?>
         <tr>
             <th scope="row">여분필드<?php echo $i ?></th>
             <td class="td_extra">
