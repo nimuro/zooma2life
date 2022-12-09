@@ -286,9 +286,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 //        $order_action_url = G5_BBS_PATH.'/orderformupdate.php';
 //        require_once(G5_BBS_PATH.'/orderform.sub.php');
 //    }
-
+    /* G5_BBS_PATH -> G5_HTTPS_DOMAIN */
     if( $view['wr_1'] == '1') {
-        $order_action_url = G5_BBS_PATH.'/orderformupdate.php';
+        $order_action_url = G5_HTTPS_DOMAIN.'/'.G5_BBS_DIR.'/orderformupdate.php';
         require_once(G5_BBS_PATH.'/orderform.sub.php');
 
 //        var_dump("$order_action_url=",$order_action_url); // gogosing
