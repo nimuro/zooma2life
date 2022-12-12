@@ -946,13 +946,13 @@ INSERT INTO `g5_new_win` VALUES (3,'comm','both','2022-11-08 00:00:00','2023-11-
 UNLOCK TABLES;
 
 --
--- Table structure for table `g5_order_data`
+-- Table structure for table `g5_board_order_data`
 --
 
-DROP TABLE IF EXISTS `g5_order_data`;
+DROP TABLE IF EXISTS `g5_board_order_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `g5_order_data` (
+CREATE TABLE `g5_board_order_data` (
                                  `od_id` bigint(20) unsigned DEFAULT NULL COMMENT 'order id',
                                  `ms_id` int(11) NOT NULL AUTO_INCREMENT,
                                  `mb_id` varchar(20) NOT NULL DEFAULT '',
@@ -966,13 +966,13 @@ CREATE TABLE `g5_order_data` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `g5_order_data`
+-- Dumping data for table `g5_board_order_data`
 --
 
-LOCK TABLES `g5_order_data` WRITE;
-/*!40000 ALTER TABLE `g5_order_data` DISABLE KEYS */;
-INSERT INTO `g5_order_data` VALUES (NULL,1,'zm2life','class','1','2022-11-10 16:14:34',NULL);
-/*!40000 ALTER TABLE `g5_order_data` ENABLE KEYS */;
+LOCK TABLES `g5_board_order_data` WRITE;
+/*!40000 ALTER TABLE `g5_board_order_data` DISABLE KEYS */;
+INSERT INTO `g5_board_order_data` VALUES (NULL,1,'zm2life','class','1','2022-11-10 16:14:34',NULL);
+/*!40000 ALTER TABLE `g5_board_order_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
