@@ -25,13 +25,19 @@ if (get_session("ss_direct"))
 else
     $tmp_cart_id = get_session('ss_cart_id');
 
-if (get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
-    if(function_exists('add_order_post_log')) add_order_post_log('장바구니가 비어 있습니다.');
-    alert('장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.', G5_SHOP_URL.'/cart.php');
-}
+// BBS는 장바구니 필요 없음
+//if (get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
+//    if(function_exists('add_order_post_log')) add_order_post_log('장바구니가 비어 있습니다.');
+//    alert('장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.', G5_SHOP_URL.'/cart.php');
+//}
 
 $sql = "select * from {$g5['g5_shop_order_table']} limit 1";
 $check_tmp = sql_fetch($sql);
+
+// gogosing : g5_order 테이블 추가 (g5_shop_order 참고)
+//$sql = "select * from {$g5['g5_shop_order_table']} limit 1";
+//$check_tmp = sql_fetch($sql);
+
 
 if(!isset($check_tmp['od_other_pay_type'])){
     $sql = "ALTER TABLE `{$g5['g5_shop_order_table']}` 
@@ -71,10 +77,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         $error .= "{$row['ct_option']} 의 재고수량이 부족합니다. 현재고수량 : $it_stock_qty 개\\n\\n";
 }
 
-if($i == 0) {
-    if(function_exists('add_order_post_log')) add_order_post_log('장바구니가 비어 있습니다.');
-    alert('장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.', G5_SHOP_URL.'/cart.php');
-}
+// BBS는 장바구니 없음
+//if($i == 0) {
+//    if(function_exists('add_order_post_log')) add_order_post_log('장바구니가 비어 있습니다.');
+//    alert('장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.', G5_SHOP_URL.'/cart.php');
+//}
 
 if ($error != "")
 {

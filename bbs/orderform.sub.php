@@ -851,7 +851,7 @@ $(function() {
     var $cp_btn_el;
     var $cp_row_el;
 
-    /** 
+    /**
      * gogosing
      * 쿠폰 제거
      */
@@ -1615,14 +1615,15 @@ function forderform_check(f)
         f.buyr_mail.value = f.od_email.value;
         f.buyr_tel1.value = f.od_tel.value;
         f.buyr_tel2.value = f.od_hp.value;
-        // 수신자 정보 입력할 필요 없음
+        // 수신자 정보 : 원본
         // f.rcvr_name.value = f.od_b_name.value;
         // f.rcvr_tel1.value = f.od_b_tel.value;
         // f.rcvr_tel2.value = f.od_b_hp.value;
         // f.rcvr_zipx.value = f.od_b_zip.value;
         // f.rcvr_add1.value = f.od_b_addr1.value;
         // f.rcvr_add2.value = f.od_b_addr2.value;
-        // 주문자 정보로 수신자 정보 셋팅
+        // 수신자 정보 : 주문자 정보로 수신자 정보 셋팅
+        // gogosing
         f.rcvr_name.value = f.od_name.value;
         f.rcvr_tel1.value = f.od_tel.value;
         f.rcvr_tel2.value = f.od_hp.value;
@@ -1711,8 +1712,26 @@ function forderform_check(f)
         <?php } ?>
     }
 
-    // gogosing
-    alert("결제 테스트");
+    // gogosing :
+    <?php if($default['de_pg_service'] == 'kcp') { ?>
+    // $sql_common = " od_receipt_price = '$od_receipt_price', od_refund_price = '$od_refund_price', od_status = '$od_status', od_delivery_company = '$od_delivery_company', od_receipt_time = '$od_receipt_time' ";
+    // sql_query(" INSERT INTO {$g5['g5_bbs_order_table']} SET $sql_common ");
+
+    $sql = " insert into {$g5['g5_bbs_order_table']}
+    set mb_id   = '$mb_id',
+    au_menu = '$au_menu',
+    au_auth = '{$post_r},{$post_w},{$post_d}' ";
+    $result = sql_query($sql, false);
+    if (!$result) {
+        $sql = " update {$g5['auth_table']}
+        set au_auth = '{$post_r},{$post_w},{$post_d}'
+        where mb_id   = '$mb_id'
+        and au_menu = '$au_menu' ";
+        sql_query($sql);
+    }
+    <?php } ?>
+
+    alert("zm2ife 결제 테스트");
 }
 
 // 구매자 정보와 동일합니다.
