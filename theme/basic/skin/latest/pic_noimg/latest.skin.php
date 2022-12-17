@@ -28,8 +28,8 @@ $list_count = (is_array($list) && $list) ? count($list) : 0;
                 $img = G5_IMG_URL.'/no_img.png';
                 $thumb['alt'] = '이미지가 없습니다.';
             }
-            $img_content = '<img src="'.$img.'" alt="'.$thumb['alt'].'" >';
-            $img_link_html = '<a href="'.$wr_href.'" class="lt_img" >'.run_replace('thumb_image_tag', $img_content, $thumb).'</a>';
+            /*$img_content = '<img src="'.$img.'" alt="'.$thumb['alt'].'" >';*/
+            /*$img_link_html = '<a href="'.$wr_href.'" class="lt_img" >'.run_replace('thumb_image_tag', $img_content, $thumb).'</a>';*/
         }
     ?>
         <li>
