@@ -21,14 +21,15 @@ $admin = get_admin("super");
         <span><b>회사명</b> <?php echo $default['de_admin_company_name']; ?></span>
         <span><b>주소</b> <?php echo $default['de_admin_company_addr']; ?></span><br>
         <span><b>사업자 등록번호</b> <?php echo $default['de_admin_company_saupja_no']; ?></span><br>
-        <span><b>대표</b> <?php echo $default['de_admin_company_owner']; ?></span>
-        <span><b>전화</b> <?php echo $default['de_admin_company_tel']; ?></span>
-        <span><b>팩스</b> <?php echo $default['de_admin_company_fax']; ?></span><br>
+        <span><b>대표</b> <?php echo $default['de_admin_company_owner']; ?></span><br>
+        <span><b>연락처</b> <?php echo $default['de_admin_info_email']; ?></span><br>
+        <!--<span><b>전화</b> <?php /*echo $default['de_admin_company_tel']; */?></span>-->
+        <!--<span><b>팩스</b> <?php /*echo $default['de_admin_company_fax']; */?></span><br>-->
         <!-- <span><b>운영자</b> <?php echo $admin['mb_name']; ?></span><br> -->
-        <span><b>통신판매업신고번호</b> <?php echo $default['de_admin_tongsin_no']; ?></span><br>
-        <span><b>개인정보 보호책임자</b> <?php echo $default['de_admin_info_name']; ?></span>
+        <!--<span><b>통신판매업신고번호</b> <?php /*echo $default['de_admin_tongsin_no']; */?></span><br>-->
+        <!--<span><b>개인정보 보호책임자</b> <?php /*echo $default['de_admin_info_name']; */?></span>-->
 
-        <?php if ($default['de_admin_buga_no']) echo '<span><b>부가통신사업신고번호</b> '.$default['de_admin_buga_no'].'</span>'; ?><br>
+        <?php /*if ($default['de_admin_buga_no']) echo '<span><b>부가통신사업신고번호</b> '.$default['de_admin_buga_no'].'</span>'; */?><!--<br>-->
         Copyright &copy; 2001-2013 <?php echo $default['de_admin_company_name']; ?>. All Rights Reserved.
     </p>
    <?php
