@@ -103,7 +103,9 @@ $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) 
 $row = sql_fetch($sql);
 $tot_ct_price = $row['od_price'];
 $cart_count = $row['cart_count'];
-$tot_od_price = $tot_ct_price;
+// gogosing : bbs는 카트기능 없으므로 수정
+//$tot_od_price = $tot_ct_price;
+$tot_od_price = $od_price;
 
 // 쿠폰금액계산
 $tot_cp_price = $tot_it_cp_price = $tot_od_cp_price = 0;
@@ -213,10 +215,10 @@ if($is_member) {
     $tot_cp_price = $tot_it_cp_price + $tot_od_cp_price;
 }
 
-if ((int)($row['od_price'] - $tot_cp_price) !== $i_price) {
-    if(function_exists('add_order_post_log')) add_order_post_log('쿠폰금액 최종 계산 Error.');
-    die("Error.");
-}
+//if ((int)($row['od_price'] - $tot_cp_price) !== $i_price) {
+//    if(function_exists('add_order_post_log')) add_order_post_log('쿠폰금액 최종 계산 Error.');
+//    die("Error.");
+//}
 
 // 배송비가 상이함
 $send_cost = get_sendcost($tmp_cart_id);
@@ -262,21 +264,29 @@ if ((int)($send_cost - $tot_sc_cp_price) !== (int)($i_send_cost - $i_send_coupon
 }
 
 // 추가배송비가 상이함
-$od_b_zip   = preg_replace('/[^0-9]/', '', $od_b_zip);
-$od_b_zip1  = substr($od_b_zip, 0, 3);
-$od_b_zip2  = substr($od_b_zip, 3);
-$zipcode = $od_b_zip;
-$sql = " select sc_id, sc_price from {$g5['g5_shop_sendcost_table']} where sc_zip1 <= '$zipcode' and sc_zip2 >= '$zipcode' ";
-$tmp = sql_fetch($sql);
-if(! (isset($tmp['sc_id']) && $tmp['sc_id']))
-    $send_cost2 = 0;
-else
-    $send_cost2 = (int) $tmp['sc_price'];
+if(isset($od_b_zip) === false) { // gogosing bbs 결제시 배송비 사용하지 않음
+    $od_b_zip = "";
+    $od_b_zip1 = "";
+    $od_b_zip2 = "";
+    $zipcode = "";
+}else {
+    $od_b_zip   = preg_replace('/[^0-9]/', '', $od_b_zip);
+    $od_b_zip1  = substr($od_b_zip, 0, 3);
+    $od_b_zip2  = substr($od_b_zip, 3);
+    $zipcode = $od_b_zip;
+    $sql = " select sc_id, sc_price from {$g5['g5_shop_sendcost_table']} where sc_zip1 <= '$zipcode' and sc_zip2 >= '$zipcode' ";
+    $tmp = sql_fetch($sql);
+    if(! (isset($tmp['sc_id']) && $tmp['sc_id']))
+        $send_cost2 = 0;
+    else
+        $send_cost2 = (int) $tmp['sc_price'];
 
-if($send_cost2 !== $i_send_cost2){
-    if(function_exists('add_order_post_log')) add_order_post_log('추가배송비 최종 계산 Error...');
-    die("Error...");
+    if($send_cost2 !== $i_send_cost2){
+        if(function_exists('add_order_post_log')) add_order_post_log('추가배송비 최종 계산 Error...');
+        die("Error...");
+    }
 }
+
 
 // 결제포인트가 상이함
 // 회원이면서 포인트사용이면
@@ -308,6 +318,11 @@ if ($od_temp_point)
         if(function_exists('add_order_post_log')) add_order_post_log('회원님의 포인트가 부족하여 포인트로 결제 할 수 없습니다.');
         alert('회원님의 포인트가 부족하여 포인트로 결제 할 수 없습니다.');
     }
+}
+
+// gogosing
+if(isset($send_cost2) == false) {
+    $send_cost2 = 0;
 }
 
 $i_price = $i_price + $i_send_cost + $i_send_cost2 - $i_temp_point - $i_send_coupon;
@@ -531,25 +546,30 @@ if($default['de_tax_flag_use']) {
     $od_free_mny = isset($_POST['comm_free_mny']) ? (int) $_POST['comm_free_mny'] : 0;
 }
 
+// gogosing test
+$od_b_name = $od_name;
+$od_b_tel = $od_tel;
+$od_b_hp = $od_hp;
+
 $od_email         = get_email_address($od_email);
 $od_name          = clean_xss_tags($od_name);
 $od_tel           = clean_xss_tags($od_tel);
 $od_hp            = clean_xss_tags($od_hp);
-$od_zip           = preg_replace('/[^0-9]/', '', $od_zip);
-$od_zip1          = substr($od_zip, 0, 3);
-$od_zip2          = substr($od_zip, 3);
-$od_addr1         = clean_xss_tags($od_addr1);
-$od_addr2         = clean_xss_tags($od_addr2);
-$od_addr3         = clean_xss_tags($od_addr3);
-$od_addr_jibeon   = preg_match("/^(N|R)$/", $od_addr_jibeon) ? $od_addr_jibeon : '';
+$od_zip           = ""; //preg_replace('/[^0-9]/', '', $od_zip);
+$od_zip1          = ""; //substr($od_zip, 0, 3);
+$od_zip2          = ""; //substr($od_zip, 3);
+$od_addr1         = ""; //clean_xss_tags($od_addr1);
+$od_addr2         = ""; //clean_xss_tags($od_addr2);
+$od_addr3         = ""; //clean_xss_tags($od_addr3);
+$od_addr_jibeon   = ""; //preg_match("/^(N|R)$/", $od_addr_jibeon) ? $od_addr_jibeon : '';
 $od_b_name        = clean_xss_tags($od_b_name);
 $od_b_tel         = clean_xss_tags($od_b_tel);
 $od_b_hp          = clean_xss_tags($od_b_hp);
-$od_b_addr1       = clean_xss_tags($od_b_addr1);
-$od_b_addr2       = clean_xss_tags($od_b_addr2);
-$od_b_addr3       = clean_xss_tags($od_b_addr3);
-$od_b_addr_jibeon = preg_match("/^(N|R)$/", $od_b_addr_jibeon) ? $od_b_addr_jibeon : '';
-$od_memo          = clean_xss_tags($od_memo, 1, 1, 0, 0);
+$od_b_addr1       = ""; //clean_xss_tags($od_b_addr1);
+$od_b_addr2       = ""; //clean_xss_tags($od_b_addr2);
+$od_b_addr3       = ""; //clean_xss_tags($od_b_addr3);
+$od_b_addr_jibeon = ""; //preg_match("/^(N|R)$/", $od_b_addr_jibeon) ? $od_b_addr_jibeon : '';
+$od_memo          = ""; //clean_xss_tags($od_memo, 1, 1, 0, 0);
 $od_deposit_name  = clean_xss_tags($od_deposit_name);
 $od_tax_flag      = $default['de_tax_flag_use'];
 
@@ -641,7 +661,7 @@ if(! $result || ! (isset($exists_order['od_id']) && $od_id && $exists_order['od_
     // 관리자에게 오류 알림 메일발송
     $error = 'order';
     include G5_SHOP_PATH.'/ordererrormail.php';
-    
+
     if(function_exists('add_order_post_log')) add_order_post_log($cancel_msg);
     die('<p>고객님의 주문 정보를 처리하는 중 오류가 발생해서 주문이 완료되지 않았습니다.</p><p>'.strtoupper($od_pg).'를 이용한 전자결제(신용카드, 계좌이체, 가상계좌 등)은 자동 취소되었습니다.');
 }
@@ -753,9 +773,9 @@ if($is_member) {
     }
 }
 
-
-include_once(G5_SHOP_PATH.'/ordermail1.inc.php');
-include_once(G5_SHOP_PATH.'/ordermail2.inc.php');
+// gogosing : 메일발송은 임시로 막음
+//include_once(G5_SHOP_PATH.'/ordermail1.inc.php');
+//include_once(G5_SHOP_PATH.'/ordermail2.inc.php');
 
 // SMS BEGIN --------------------------------------------------------
 // 주문고객과 쇼핑몰관리자에게 SMS 전송

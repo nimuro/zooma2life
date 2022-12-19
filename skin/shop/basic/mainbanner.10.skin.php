@@ -49,8 +49,10 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
             $item_html .= '</a>';
         $item_html .= '</div>';
     }
-    
-    $banner_style = $max_height ? 'style="min-height:'.($max_height + 25).'px"' : '';
+
+    if($max_height > 1080) $max_height = 1080; // gogosing : 해상도 강제 변경
+//    $banner_style = $max_height ? 'style="min-height:'.($max_height + 25).'px"' : '';
+    $banner_style = $max_height ? 'style="min-height:'.($max_height).'p"' : '';
     if ($i==0) echo '<div id="main_bn" '.$banner_style.'><div class="main_banner_owl owl-carousel">'.PHP_EOL;
     
     echo $item_html;

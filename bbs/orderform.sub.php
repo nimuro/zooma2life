@@ -284,6 +284,7 @@ if($is_kakaopay_use) {
 
             // orderform.2.php
             $od_id = get_uniqid();
+            set_session('ss_order_id', $od_id);
             $goods = $write['wr_subject'];
             $tot_price = $tot_sell_price;
         }
@@ -1306,6 +1307,7 @@ function forderform_check(f)
 {
     check_field(f.od_name,"forderform_check");
 
+
     // 재고체크
     // var stock_msg = order_stock_check();
     // if(stock_msg != "") {
@@ -1632,6 +1634,10 @@ function forderform_check(f)
         f.rcvr_add1.value = '';
         f.rcvr_add2.value = '';
 
+        // gogosing
+        console.log("order info 1: "+f.rcvr_name);
+        console.log("order info 2: "+f);
+
         if(f.pay_method.value != "무통장") {
             jsf__pay( f );
         } else {
@@ -1717,18 +1723,26 @@ function forderform_check(f)
     // $sql_common = " od_receipt_price = '$od_receipt_price', od_refund_price = '$od_refund_price', od_status = '$od_status', od_delivery_company = '$od_delivery_company', od_receipt_time = '$od_receipt_time' ";
     // sql_query(" INSERT INTO {$g5['g5_bbs_order_table']} SET $sql_common ");
 
-    $sql = " insert into {$g5['g5_bbs_order_table']}
-    set mb_id   = '$mb_id',
-    au_menu = '$au_menu',
-    au_auth = '{$post_r},{$post_w},{$post_d}' ";
-    $result = sql_query($sql, false);
-    if (!$result) {
-        $sql = " update {$g5['auth_table']}
-        set au_auth = '{$post_r},{$post_w},{$post_d}'
-        where mb_id   = '$mb_id'
-        and au_menu = '$au_menu' ";
-        sql_query($sql);
-    }
+    // $sql = " insert into {$g5['board_order_table']} "
+    // set od_id = '$od_id',
+    // mb_id = 'mb_id',
+    // od_name = '$od_name',
+    // od_email = '$od_email'
+    // od_tel = '$od_tel',
+    // od_hp = '$od_hp',
+    // od_zip1 = '$od_zip1',
+    // od_zip2 = '$od_zip2',
+    // od_addr1 = '$od_addr1',
+    // od_cart_count = '$od_cart_count',
+    // od_cart_price = '$od_cart_price' ";
+    // $result = sql_query($sql, false);
+    // if (!$result) {
+    //     $sql = " update {$g5['auth_table']}
+    //     set au_auth = '{$post_r},{$post_w},{$post_d}'
+    //     where mb_id   = '$mb_id'
+    //     and au_menu = '$au_menu' ";
+    //     sql_query($sql);
+    // }
     <?php } ?>
 
     alert("zm2ife 결제 테스트");

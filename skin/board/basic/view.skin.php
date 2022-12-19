@@ -271,12 +271,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         #forderform #sod_frm_pt{border-top:1px solid #e3e5e8}
     </style>
 
-    <br/>
-    <!-- gogosing start -->
-    -- 결제 모듈 준비중 ---
-    <br/>
-    <br/>
-
+    <!-- gogosing start : 유료 결제시 시작 -->
     <?php
     // orderform.php
 //    if($is_mobile_order) {
@@ -288,6 +283,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 //    }
     /* G5_BBS_PATH -> G5_HTTPS_DOMAIN */
     if( $view['wr_1'] == '1') {
+        echo "<br/>--- 결제 모듈 준비중 ---<br/><br/>";
+
         $order_action_url = G5_HTTPS_DOMAIN.'/'.G5_BBS_DIR.'/orderformupdate.php';
         require_once(G5_BBS_PATH.'/orderform.sub.php');
 
