@@ -5,6 +5,10 @@ use g5;
 -- Table structure for table `g5_board_order_data`
 --
 
+-- 메뉴 도메인 변경
+update g5_menu set me_link = REPLACE(me_link, 'http://zm2life.com', 'http://localhost:8080');
+
+-- BBS 주문 심플
 DROP TABLE IF EXISTS `g5_board_order_data`;
 CREATE TABLE IF NOT EXISTS `g5_board_order_data` (
     `od_id` bigint(20) unsigned null comment 'order id',
@@ -20,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `g5_board_order_data` (
 
 -- --------------------------------------------------------
 
+-- BBS 주문 상세
 DROP TABLE IF EXISTS `g5_board_order`;
 CREATE TABLE IF NOT EXISTS `g5_board_order` (
     `od_id` bigint(20) unsigned NOT NULL,
