@@ -36,7 +36,7 @@ $admin = get_admin("super");
 	            <!--<span><b>전화</b> <?php /*echo $default['de_admin_company_tel']; */?></span><br>-->
 	            <!--<span><b>팩스</b> <?php /*echo $default['de_admin_company_fax']; */?></span><br>-->
 	            <!-- <span><b>운영자</b> <?php echo $admin['mb_name']; ?></span><br> -->
-	           <!-- <span><b>통신판매업신고번호</b> <?php /*echo $default['de_admin_tongsin_no']; */?></span>-->
+	            <span><b>통신판매업신고번호</b> <?php echo $default['de_admin_tongsin_no']; ?></span>
 	            <!--<span><b>개인정보 보호책임자</b> <?php /*echo $default['de_admin_info_name']; */?></span><br>-->
 				<?php /*if ($default['de_admin_buga_no']) echo '<span><b>부가통신사업신고번호</b> '.$default['de_admin_buga_no'].'</span>'; */?>
 			</p>
